@@ -1,0 +1,29 @@
+/*macro definitions of PIR motion sensor pin and LED pin*/
+#define PIR_MOTION_SENSOR 2 //use pin 2 to receive the signal
+#define LED 9 //the Grove - LED is connected to pin 9
+void setup()  {
+  pinMode(PIR_MOTION_SENSOR, INPUT);
+  pinMode(LED, OUTPUT);
+}
+
+void loop() {
+  if(MotionDetected()) {  //if it detects anyone moving
+    digitalWrite(LED, HIGH);  //sets the LED on
+    delay(500); //waits for a second
+    digitalWrite(LED, LOW); //sets the LED off
+    delay(500); //waits for a second
+  } else {
+    digitalWrite(LED,LOW);
+  }
+}
+
+/*************************************************************/
+/*Function: Detect whether anyone moves in its detecting range*/
+boolean MotionDetected() {
+  int sensorValue = digitalRead(PIR_MOTION_SENSOR);
+  if(sensorValue == HIGH) { //if the sensor output goes HIGH
+    return true;
+  } else {
+    return false;
+  }
+}
